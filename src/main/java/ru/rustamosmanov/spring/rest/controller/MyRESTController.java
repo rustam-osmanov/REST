@@ -1,11 +1,8 @@
 package ru.rustamosmanov.spring.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.rustamosmanov.spring.rest.entity.EmployeeBD;
-import ru.rustamosmanov.spring.rest.exception.EmployeeIncorrectData;
 import ru.rustamosmanov.spring.rest.exception.NoSuchEmployeeException;
 import ru.rustamosmanov.spring.rest.service.EmployeeService;
 
@@ -39,9 +36,9 @@ public class MyRESTController {
     }
 
     @PostMapping("/employees")
-    public EmployeeBD addNewEmployee(@RequestBody  EmployeeBD employeeBD) {
+    public EmployeeBD addNewEmployee(@RequestBody EmployeeBD employeeBD) {
         if (employeeBD == null || employeeBD.getId() != null) {
-            throw new NoSuchEmployeeException("Неверный формат данных для данного api post /employees " );
+            throw new NoSuchEmployeeException("Неверный формат данных для данного api post /employees ");
         }
 
         employeeService.saveEmployee(employeeBD);
@@ -49,12 +46,12 @@ public class MyRESTController {
     }
 
     @PutMapping("/employees")
-    public EmployeeBD updateEmployee(@RequestBody  EmployeeBD employeeBD) {
+    public EmployeeBD updateEmployee(@RequestBody EmployeeBD employeeBD) {
         if (employeeBD == null || employeeBD.getId() == null) {
-            throw new NoSuchEmployeeException("Неверный формат данных для данного api put /employees " );
+            throw new NoSuchEmployeeException("Неверный формат данных для данного api put /employees ");
         }
-        if (employeeService.getEmployee(employeeBD.getId())  == null) {
-            throw new NoSuchEmployeeException("Некорректный формат данных для данного api put /employees " );
+        if (employeeService.getEmployee(employeeBD.getId()) == null) {
+            throw new NoSuchEmployeeException("Некорректный формат данных для данного api put /employees ");
         }
         employeeService.saveEmployee(employeeBD);
         return employeeBD;

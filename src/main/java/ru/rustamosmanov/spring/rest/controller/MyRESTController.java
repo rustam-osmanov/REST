@@ -36,23 +36,5 @@ public class MyRESTController {
                     + " не найден в БД!");
         }
         return employeeBD;
-
-
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<EmployeeIncorrectData> handleException(
-            NoSuchEmployeeException exception) {
-        EmployeeIncorrectData data = new EmployeeIncorrectData();
-        data.setInfo(exception.getMessage());
-        return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<EmployeeIncorrectData> handleException(
-            Exception exception) {
-        EmployeeIncorrectData data = new EmployeeIncorrectData();
-        data.setInfo("Неверный формат или некорректный запрос!");
-        return new ResponseEntity<>(data, HttpStatus.BAD_REQUEST);
     }
 }
